@@ -1,7 +1,12 @@
+import Navbar from "@/components/modules/navbar/Navbar";
 
 
 export default function Home() {
   return (
-    <h1>Teast</h1>
+    <>
+    <Navbar/>
+    
+    
+    </>
   )
 }
