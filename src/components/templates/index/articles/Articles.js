@@ -13,6 +13,7 @@ const Articles = () => {
       <span className={styles.description}>دانستنی های جذاب دنیای قهوه</span>
       <main>
         <Swiper
+        
           slidesPerView={3}
           spaceBetween={30}
           dir="rtl"

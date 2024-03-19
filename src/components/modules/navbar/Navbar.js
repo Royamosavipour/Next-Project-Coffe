@@ -1,10 +1,12 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaCartShopping, FaRegHeart } from "react-icons/fa6";
 
 function Navbar() {
+  const [fixTop, setFixTop] = useState(false);
   return (
     <>
       <nav className={styles.navbar}>
