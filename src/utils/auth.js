@@ -2,7 +2,7 @@ import { hash, compare } from "bcryptjs";
 import { verify, sign } from "jsonwebtoken";
 
 const hashPassword = async (password) => {
-  const hashedPassword = await hash(password);
+  const hashedPassword = await hash(password,12);
   return hashedPassword;
 };
 

@@ -8,14 +8,20 @@ export async function POST(req) {
   const body = await req.json();
   const { name, phone, email, password } = body;
 
+  // Validation
+
   const isUserExist = await UserModel.findOne({
     $or: [{ name }, { email }, { phone }],
   });
 
   if (isUserExist) {
     return Response.json(
-      { message: "The username or email or phone exist already" },
-      { status: 422 }
+      {
+        message: "The username or email or phone exist already !!",
+      },
+      {
+        status: 422,
+      }
     );
   }
 
@@ -23,6 +29,7 @@ export async function POST(req) {
   const accessToken = generateAccessToken({ name });
 
   const users = await UserModel.find({});
+
   await UserModel.create({
     name,
     email,
@@ -32,10 +39,10 @@ export async function POST(req) {
   });
 
   return Response.json(
-    { message: "success response" },
+    { message: "User signed up successfully :))" },
     {
       status: 201,
-      headers: { "Set-Cooki": `token=${accessToken};path=/;httpOnly=true` },
+      headers: { "Set-Cookie": `token=${accessToken};path=/;httpOnly=true` },
     }
   );
 }
