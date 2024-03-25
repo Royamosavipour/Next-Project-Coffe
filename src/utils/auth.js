@@ -2,7 +2,7 @@ import { hash, compare } from "bcryptjs";
 import { verify, sign } from "jsonwebtoken";
 
 const hashPassword = async (password) => {
-  const hashedPassword = await hash(password,12);
+  const hashedPassword = await hash(password, 12);
   return hashedPassword;
 };
 
@@ -32,10 +32,29 @@ const generateRefreshToken = (data) => {
   return token;
 };
 
+const valiadteEmail = (email) => {
+  const pattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/g;
+  return pattern.test(email);
+};
+
+const valiadtePhone = (phone) => {
+  const pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/g;
+  return pattern.test(phone);
+};
+
+const valiadtePassword = (password) => {
+  const pattern =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/g;
+  return pattern.test(password);
+};
+
 export {
   hashPassword,
   verifyPassword,
   generateAccessToken,
   verifyAccessToken,
   generateRefreshToken,
+  valiadteEmail,
+  valiadtePhone,
+  valiadtePassword,
 };
