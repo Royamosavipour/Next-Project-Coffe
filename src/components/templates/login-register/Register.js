@@ -5,8 +5,16 @@ import Sms from "./Sms";
 const Register = ({ showloginForm }) => {
   const [isRegisterWithPass, setIsRegisterWithPass] = useState(false);
   const [isRegisterWithOPT, setIsRegisterWithOPT] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const hideOPTform = () => setIsRegisterWithOPT(false);
+
+  const signUp = () => {
+    console.log("test=>");
+  };
 
   return (
     <>
@@ -15,22 +23,34 @@ const Register = ({ showloginForm }) => {
       ) : (
         <>
           <div className={styles.form}>
-            <input className={styles.input} type="text" placeholder="نام" />
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="نام"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
             <input
               className={styles.input}
               type="text"
               placeholder="شماره موبایل  "
+              value={phone}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               className={styles.input}
               type="email"
               placeholder="ایمیل (دلخواه)"
+              value={email}
+              onChange={(e) => setName(e.target.value)}
             />
             {isRegisterWithPass && (
               <input
                 className={styles.input}
                 type="password"
                 placeholder="رمز عبور"
+                value={password}
+                onChange={(e) => setName(e.target.value)}
               />
             )}
             <p
@@ -41,7 +61,9 @@ const Register = ({ showloginForm }) => {
               ثبت نام با کد تایید
             </p>
             <button
-              onClick={() => setIsRegisterWithPass(true)}
+              onClick={() => {
+                isRegisterWithPass ? signUp() : setIsRegisterWithPass(true);setIsRegisterWithPass(true)
+              }}
               style={{ marginTop: ".7rem" }}
               className={styles.btn}
             >
