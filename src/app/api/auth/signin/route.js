@@ -1,19 +1,54 @@
 import connectToDB from "@/configs/db";
-import { valiadteEmail, valiadtePassword } from "@/utils/auth";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+  valiadteEmail,
+  valiadtePassword,
+  verifyPassword,
+} from "@/utils/auth";
+import UserModel from "moongose/models/user_model";
 
 export async function POST(req) {
   try {
-    try {
-      connectToDB();
-      const body = await req.json();
-      const { email, password } = body;
-      //Validation
-      const isValidEmail = valiadteEmail(email);
-      const isValidPassword = valiadtePassword(password);
+    connectToDB();
+    const body = await req.json();
+    const { email, password } = body;
+    //Validation
+    const isValidEmail = valiadteEmail(email);
+    const isValidPassword = valiadtePassword(password);
 
-      if (!isValidEmail || !isValidPassword) {
-        return Response.json()
+    if (!isValidEmail || !isValidPassword) {
+      return Response.json(
+        { message: "email or password is invalid" },
+        { status: 419 }
+      );
+    }
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return Response.json({ message: "User not found" }, { status: 422 });
+    }
+    const isCorrectPasswordWithHash = verifyPassword(password, user.password);
+    if (!isCorrectPasswordWithHash) {
+      return Response.json(
+        { Message: "Email or password is not correct" },
+        { status: 401 }
+      );
+    }
+
+    const accessToken = generateAccessToken({ email });
+    const refreshToken = generateRefreshToken({ email });
+
+    return Response.json(
+      { Message: "User logged in successfully :))" },
+      {
+        status: 200,
+        headers: {
+          "Set-Cookie": `token=${accessToken};path=/;httpOnly=true;`,
+        },
       }
-    } catch (error) {}
-  } catch (error) {}
+    );
+  } catch (error) {
+    console.log("Err=>", error);
+    return Response.json({ Message: error }, { status: 500 });
+  }
 }
