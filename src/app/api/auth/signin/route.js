@@ -6,7 +6,7 @@ import {
   valiadtePassword,
   verifyPassword,
 } from "@/utils/auth";
-import UserModel from "moongose/models/user_model";
+import UserModel from "@/models/User";
 
 export async function POST(req) {
   try {
@@ -30,7 +30,7 @@ export async function POST(req) {
     const isCorrectPasswordWithHash = verifyPassword(password, user.password);
     if (!isCorrectPasswordWithHash) {
       return Response.json(
-        { Message: "Email or password is not correct" },
+        { message: "Email or password is not correct" },
         { status: 401 }
       );
     }
@@ -38,8 +38,16 @@ export async function POST(req) {
     const accessToken = generateAccessToken({ email });
     const refreshToken = generateRefreshToken({ email });
 
+    await UserModel.findOneAndUpdate(
+      { email },
+      {
+        $set: {
+          refreshToken,
+        },
+      }
+    );
     return Response.json(
-      { Message: "User logged in successfully :))" },
+      { message: "User logged in successfully :))" },
       {
         status: 200,
         headers: {
@@ -49,6 +57,6 @@ export async function POST(req) {
     );
   } catch (error) {
     console.log("Err=>", error);
-    return Response.json({ Message: error }, { status: 500 });
+    return Response.json({ message: error }, { status: 500 });
   }
 }

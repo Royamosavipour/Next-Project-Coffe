@@ -36,6 +36,7 @@ const Register = ({ showloginForm }) => {
       headers: { "Content-Type": "application-json" },
       body: JSON.stringify(user),
     });
+    
 
     if (res.status === 201) {
       showSwal("ثبت نام با موفقیت انجام شد", "success", "ورود به پنل کاربری");
