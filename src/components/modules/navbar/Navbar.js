@@ -5,7 +5,7 @@ import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaCartShopping, FaRegHeart } from "react-icons/fa6";
 
-function Navbar() {
+function Navbar({ isLogin }) {
   const [fixTop, setFixTop] = useState(false);
 
   useEffect(() => {
@@ -54,19 +54,26 @@ function Navbar() {
               <Link href="/login-register">ورود/عضویت</Link>
             </li>
             {/* start my accunt section */}
-            <div className={styles.dropdown}>
-              <Link href="/p-user">
-                حساب کاربری
-                <IoIosArrowDown />
-              </Link>
-              <div className={styles.dropdown_content}>
-                <Link href="/p-user/orders">سفارشات</Link>
-                <Link href="/p-user/tickets">تیکت‌های پشتیبانی</Link>
-                <Link href="/p-user/comments">کامنت‌ها</Link>
-                <Link href="/p-user/wishlist">علاقمندی</Link>
-                <Link href="/p-user/account-details">جزئیات اکانت</Link>
+            {isLogin ? (
+              <div className={styles.dropdown}>
+                <Link href="/p-user">
+                  حساب کاربری
+                  <IoIosArrowDown />
+                </Link>
+                <div className={styles.dropdown_content}>
+                  <Link href="/p-user/orders">سفارشات</Link>
+                  <Link href="/p-user/tickets">تیکت‌های پشتیبانی</Link>
+                  <Link href="/p-user/comments">کامنت‌ها</Link>
+                  <Link href="/p-user/wishlist">علاقمندی</Link>
+                  <Link href="/p-user/account-details">جزئیات اکانت</Link>
+                </div>
               </div>
-            </div>
+            ) : (
+              <li>
+                <Link href="/login-register">ورود / عضویت</Link>
+              </li>
+            )}
+
             {/* end my accunt section */}
           </ul>
           <div className={styles.navbar_icons}>

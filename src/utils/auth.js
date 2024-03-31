@@ -13,7 +13,7 @@ const verifyPassword = async (password, hashedPassword) => {
 
 const generateAccessToken = (data) => {
   const token = sign({ ...data }, process.env.AccessTokenSecretKey, {
-    expiresIn: "60s",
+    expiresIn: "60d",
   });
   return token;
 };
@@ -58,8 +58,3 @@ export {
   valiadtePhone,
   valiadtePassword,
 };
-
-
-
-
-
