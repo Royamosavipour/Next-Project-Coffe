@@ -4,20 +4,10 @@ import Articles from "@/components/templates/index/articles/Articles";
 import Banner from "@/components/templates/index/baner/Banner";
 import Lates from "@/components/templates/index/latest/Latest";
 import Promote from "@/components/templates/index/promote/Promote";
-import { verifyAccessToken } from "@/utils/auth";
-import UserModel from "@/models/User";
-import { cookies } from "next/headers";
+import { authUser } from "@/utils/auth";
 
 export default async function Home() {
-  const token = cookies().get("token");
-  let user=null
-
-  if (token) {
-    const tokenPayload = verifyAccessToken(token.value);
-    if (tokenPayload) {
-      user = await UserModel.findOne({ email: tokenPayload.email });
-    }
-  }
+  const user =await authUser();
 
   return (
     <>

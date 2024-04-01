@@ -50,9 +50,6 @@ function Navbar({ isLogin }) {
             <li>
               <Link href="/rules">قوانین</Link>
             </li>
-            <li>
-              <Link href="/login-register">ورود/عضویت</Link>
-            </li>
             {/* start my accunt section */}
             {isLogin ? (
               <div className={styles.dropdown}>
