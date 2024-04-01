@@ -7,11 +7,11 @@ import Promote from "@/components/templates/index/promote/Promote";
 import { authUser } from "@/utils/auth";
 
 export default async function Home() {
-  const user =await authUser();
+  const user = await authUser();
 
   return (
     <>
-      <Navbar isLogin={user} />
+      <Navbar isLogin={user ? true : false} />
       <Banner />
       <Lates />
       <Promote />
