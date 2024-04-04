@@ -26,16 +26,17 @@ export async function POST(req) {
       smell,
       tags,
     });
+
     return Response.json(
       { message: "Product created successfully :))", data: product },
       { status: 201 }
     );
-  } catch (error) {
-    return Response.json({ message: error }, { status: 500 });
+  } catch (err) {
+    return Response.json({ message: err }, { status: 500 });
   }
 }
 
 export async function GET() {
-  const products = await ProductModel.find({}).populate("comments");
+  const products = await ProductModel.find({}, "-__v").populate("comments");
   return Response.json(products);
 }
