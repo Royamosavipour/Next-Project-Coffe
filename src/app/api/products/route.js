@@ -13,9 +13,7 @@ export async function POST(req) {
       weight,
       suitableFor,
       smell,
-      score,
       tags,
-      comments,
     } = body;
 
     const product = await ProductModel.create({
@@ -26,7 +24,6 @@ export async function POST(req) {
       weight,
       suitableFor,
       smell,
-      score,
       tags,
     });
     return Response.json(
@@ -36,4 +33,9 @@ export async function POST(req) {
   } catch (error) {
     return Response.json({ message: error }, { status: 500 });
   }
+}
+
+export async function GET() {
+  const products = await ProductModel.find({}).populate("comments");
+  return Response.json(products);
 }
