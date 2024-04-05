@@ -7,9 +7,15 @@ import Tabs from "@/components/templates/product/Tabs";
 import Footer from "@/components/modules/footer/Footer";
 import Navbar from "@/components/modules/navbar/Navbar";
 import { authUser } from "@/utils/auth";
+import connectToDB from "@/configs/db";
+import ProductModel from '@/models/Product'
 
-const product = async () => {
+const product = async ({ params }) => {
   const user = await authUser();
+  connectToDB();
+  const productID = params.id;
+  const product=await ProductModel.findOne({_id:productID})
+  
 
   return (
     <div className={styles.container}>
