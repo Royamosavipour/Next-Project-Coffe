@@ -2,6 +2,11 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 
 import styles from "./comment.module.css";
 const Comment = ({ username, body, date, score }) => {
+
+
+
+
+  
   return (
     <section className={styles.comment}>
       <img src="/images/shahin.jpg" className={styles.avatar} alt="" />
