@@ -1,15 +1,12 @@
 import { IoMdStar } from "react-icons/io";
 import styles from "./commentForm.module.css";
+import { useState } from "react";
 const CommentForm = () => {
+  const [username, setUsername] = useState("");
+  const [body, setBody] = useState("");
+  const [email, setEmail] = useState("");
+  const [score, setScore] = useState(5);
 
-
-
-
-
-
-
-
-  
   return (
     <div className={styles.form}>
       <p className={styles.title}>دیدگاه خود را بنویسید</p>
