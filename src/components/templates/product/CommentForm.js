@@ -44,14 +44,22 @@ const CommentForm = () => {
             نام
             <span style={{ color: "red" }}>*</span>
           </label>
-          <input type="text" />
+          <input
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            type="text"
+          />
         </div>
         <div className={styles.group}>
           <label htmlFor="">
             ایمیل
             <span style={{ color: "red" }}>*</span>
           </label>
-          <input type="email" />
+          <input
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            type="email"
+          />
         </div>
       </div>
       <div className={styles.checkbox}>
