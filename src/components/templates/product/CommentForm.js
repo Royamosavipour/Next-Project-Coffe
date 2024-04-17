@@ -30,6 +30,8 @@ const CommentForm = () => {
           <span style={{ color: "red" }}>*</span>
         </label>
         <textarea
+          value={body}
+          onChange={(event) => setBody(event.target.value)}
           id="comment"
           name="comment"
           cols="45"
